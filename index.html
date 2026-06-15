@@ -1,119 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placement Bud | Land Your Dream Job</title>
+    <title>PlacementBud — Christ University Placement Portal</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+<body class="bg-[#f8fafc] text-slate-900 antialiased font-sans selection:bg-indigo-100">
 
-    <!-- Navigation Bar -->
-    <nav class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-blue-600">🎓 Placement Bud</div>
-            <div class="space-x-6 hidden md:flex font-medium">
-                <a href="#recruiters" class="hover:text-blue-600 transition">Recruiters</a>
-                <a href="#interviews" class="hover:text-blue-600 transition">Interviews</a>
-                <a href="#alumni" class="hover:text-blue-600 transition">Alumni</a>
+    <!-- HEADER & NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <!-- REVERTED TO ORIGINAL LOGO -->
+            <div class="text-xl font-bold tracking-tight">
+                <span class="text-indigo-600 text-2xl font-extrabold">P</span>lacement<span class="text-emerald-500 text-2xl font-extrabold">B</span>ud
             </div>
-            <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition">Sign Up</button>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="bg-blue-50 py-20 px-6 text-center">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
-                Your Ultimate Companion for <span class="text-blue-600">Campus Placements</span>
-            </h1>
-            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                Placement Bud helps you prepare for interviews, build a standout resume, and connect with top recruiters. Your dream job is just a click away.
-            </p>
-            <div class="flex justify-center">
-                <a href="#features" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-700 transition">
-                    Get Started Free
-                </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#features" class="hover:text-indigo-600 transition-colors">Features</a>
+                <a href="#metrics" class="hover:text-indigo-600 transition-colors">Live Metrics</a>
+                <a href="#tools" class="hover:text-indigo-600 transition-colors">Prep Tools</a>
+            </nav>
+
+            <!-- API 1: Local Storage (Department Selector) -->
+            <div class="flex items-center gap-3">
+                <label for="deptSelect" class="text-xs font-semibold text-slate-500 uppercase tracking-wider hidden sm:inline">Dept:</label>
+                <select id="deptSelect" class="bg-slate-50 border border-slate-200 rounded-lg text-sm px-3 py-1.5 focus:outline-none focus:border-indigo-500 text-slate-700 font-medium">
+                    <option value="General">--Select Dept--</option>
+                    <option value="BTech">Computer Science</option>
+                    <option value="BCA">Management</option>
+                </select>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Section -->
-    <section id="features" class="py-20 px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose Placement Bud?</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Everything you need to crack your assessments and interviews, all in one place.</p>
-            </div>
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden py-20 lg:py-28 border-b border-slate-100 bg-white">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
             
-            <div class="grid md:grid-cols-3 gap-10">
+            <div class="lg:col-span-7 max-w-2xl">
+                <div class="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-full px-3 py-1 text-xs font-medium mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></span>
+                    Tailored Workspace for <span id="dynamicDept" class="font-bold">Christites</span>
+                </div>
                 
-                <!-- Box 1: Recruiter Tracking (Local Storage API + Geolocation API) -->
-                <div id="recruiters" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition flex flex-col justify-between">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1] mb-6">
+                    Navigate your campus placement with total clarity.
+                </h1>
+                <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                    Built specifically for Christites !<br> Career journey start with a lil boost from Christ.
+                </p>
+
+                <!-- API 2: Web Notifications Button -->
+                <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                    <button id="notifyBtn" class="bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm px-6 py-3 rounded-xl transition-all shadow-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                        Enable Placement Drive Alerts
+                    </button>
+                    <span class="text-xs text-slate-500 max-w-xs">Stay informed the instant marquee recruiters open applications on campus.</span>
+                </div>
+            </div>
+
+            <!-- Hero Right Content: Only Rocket & Clipboard -->
+            <div id="metrics" class="lg:col-span-5 bg-[#f8fafc] border border-slate-200/60 rounded-3xl p-8 shadow-xl shadow-slate-100 flex flex-col justify-center">
+
+                <!-- Rocket Image -->
+                <div class="bg-white border border-slate-100 rounded-2xl p-2 shadow-sm mb-6 flex justify-center items-center overflow-hidden">
+                    <img src="Rocket.png" alt="Rocket" class="w-full h-auto max-h-[200px] object-cover rounded-xl transition-transform hover:scale-105 duration-500">
+                </div>
+
+                <!-- API 3: Clipboard Integration Element -->
+                <div class="bg-slate-900 text-slate-200 rounded-2xl p-4 flex items-center justify-between">
                     <div>
-                        <div class="text-4xl mb-4 text-center">📊</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Recruiter Tracking</h3>
-                        <p class="text-gray-600 text-sm mb-4 text-center">Keep tabs on your applications and get real-time updates on your hiring pipeline.</p>
+                        <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Exclusive Preparation Code</div>
+                        <div id="inviteCode" class="text-sm font-mono font-semibold text-white tracking-wider">CHRIST-READY-2026</div>
                     </div>
-                    <div class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                        <!-- 1. Local Storage -->
-                        <div>
-                            <label class="block text-left text-xs font-semibold text-gray-500 mb-1">Target Company:</label>
-                            <div class="flex gap-1">
-                                <input id="targetCompanyInput" type="text" class="w-full text-xs p-2 border rounded-md focus:outline-none" placeholder="e.g., Microsoft">
-                                <button onclick="saveCompany()" class="text-xs bg-gray-800 text-white px-2 rounded">Save</button>
-                                <button onclick="loadCompany()" class="text-xs bg-gray-200 text-gray-700 px-2 rounded">Load</button>
+                    <button id="copyBtn" class="bg-white/10 hover:bg-white/20 text-xs font-medium text-white px-3 py-2 rounded-lg transition-all border border-white/10">
+                        Copy Code
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CORE FEATURES SECTION -->
+    <section id="features" class="py-24 max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-3">End-to-End Tracking Architecture</h2>
+            <p class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Everything required to successfully convert your day-one slots.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white border border-slate-200/70 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all">
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-6">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Automated Recruiter Pipelines</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">Instantly view critical benchmarks, upcoming test patterns, eligibility criteria cut-offs, and custom application pipelines configured for Christ University.</p>
+            </div>
+            <div class="bg-white border border-slate-200/70 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all">
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 mb-6">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Hyper-Realistic Mock Panels</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">Practice stress handling with cross-department technical questions, dynamic casing templates, and instantaneous generative analytical scorecards.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: DEEP WORK & DISCOVERY ZONE -->
+    <section id="tools" class="py-20 bg-slate-950 text-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-2xl mb-12">
+                <span class="text-indigo-400 text-xs font-bold uppercase tracking-wider block mb-2">Deep Work & Discovery</span>
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Focus & Find Opportunities</h2>
+                <p class="text-slate-400 text-sm mt-2">Placement prep requires intense focus. Lock in with our ambient audio player, or scan your area for physical job fairs.</p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-6 max-w-4xl">
+                
+                <!-- API 4: GEOLOCATION API WIDGET -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between transition-colors relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 text-emerald-400">
+                        <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Job Fair Radar
+                        </h4>
+                        <p class="text-sm text-slate-300 font-medium mb-4">Discover off-campus drives happening near you.</p>
+                    </div>
+                    
+                    <div class="mt-4 z-10">
+                        <button id="geoBtn" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white text-sm font-medium py-3 px-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            Scan My Location
+                        </button>
+                        <div id="geoResult" class="hidden mt-4 p-3 bg-emerald-900/20 border border-emerald-500/20 rounded-lg text-xs text-emerald-200 font-mono">
+                            <!-- Coordinates will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API 5: AUDIO API WIDGET -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between transition-colors">
+                    <div>
+                        <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Focus Mode
+                        </h4>
+                        <p class="text-sm text-slate-300 font-medium mb-6">Alumni stories? Get in the zone.</p>
+                    </div>
+                    
+                    <!-- Sleek Custom Audio Player -->
+                    <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center gap-4">
+                        <button id="playPauseBtn" class="w-12 h-12 flex-shrink-0 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full flex items-center justify-center transition-all shadow-lg shadow-indigo-900/20">
+                            <!-- Play Icon -->
+                            <svg id="playIcon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                            <!-- Pause Icon (Hidden initially) -->
+                            <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                        </button>
+                        
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-end mb-1.5">
+                                <span class="text-sm font-bold text-slate-100">Batch 2026</span>
+                                <span id="timeDisplay" class="text-[10px] text-slate-500 font-mono">0:00</span>
+                            </div>
+                            <!-- Custom Progress Bar -->
+                            <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                                <div id="audioProgress" class="h-full bg-indigo-500 w-0 transition-all duration-100 ease-linear"></div>
                             </div>
                         </div>
-                        <!-- 2. Geolocation -->
-                        <div class="pt-2 border-t border-gray-100 text-center">
-                            <button onclick="fetchCoordinates()" class="w-full text-xs bg-blue-600 hover:bg-blue-700 text-white font-medium py-1.5 px-3 rounded transition">
-                                Find Nearby Jobs
-                            </button>
-                            <p id="geoDisplay" class="text-[11px] text-blue-600 font-bold mt-1.5 h-4"></p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Box 2: Mock Interviews (Audio API + File API) -->
-                <div id="interviews" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition flex flex-col justify-between">
-                    <div>
-                        <div class="text-4xl mb-4 text-center">🎤</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Mock Interviews</h3>
-                        <p class="text-gray-600 text-sm mb-4 text-center">Practice with AI-driven mock interviews and get instant feedback on your answers.</p>
-                    </div>
-                    <div class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                        <!-- 3. Audio API -->
-                        <div class="flex gap-2">
-                            <button onclick="playPrompt()" class="w-1/2 text-xs bg-emerald-600 text-white font-medium py-1.5 rounded">▶ Play</button>
-                            <button onclick="pausePrompt()" class="w-1/2 text-xs bg-amber-600 text-white font-medium py-1.5 rounded">⏸ Pause</button>
-                        </div>
-                        <!-- 4. File API -->
-                        <div class="pt-2 border-t border-gray-100 text-center">
-                            <input type="file" id="resumeSelector" onchange="processFile()" class="hidden">
-                            <label for="resumeSelector" class="block w-full text-center text-xs bg-gray-800 text-white font-medium py-1.5 rounded cursor-pointer">
-                                Upload Resume
-                            </label>
-                            <p id="fileDisplay" class="text-[10px] text-gray-600 mt-1.5 truncate font-medium"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Box 3: Voice Of Alumni (Clipboard API) -->
-                <div id="alumni" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition flex flex-col justify-between">
-                    <div>
-                        <div class="text-4xl mb-4 text-center">🗣️</div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Voice Of Alumni</h3>
-                        <p class="text-gray-600 text-sm mb-4 text-center">Learn directly from seniors who successfully cracked interviews at your dream organizations.</p>
-                    </div>
-                    <!-- 5. Clipboard API -->
-                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                        <label class="block text-left text-xs font-semibold text-gray-500 mb-1">Alumni Access Token:</label>
-                        <div class="flex gap-2">
-                            <input id="tokenText" type="text" value="CHRIST-MCA-2026" readonly class="w-full text-xs bg-gray-50 p-1.5 border rounded text-center font-bold text-gray-700">
-                            <button onclick="copyToken()" class="text-xs bg-blue-600 text-white font-medium py-1 px-3 rounded whitespace-nowrap">Copy</button>
-                        </div>
+                        <!-- Hidden Audio Element -->
+                        <audio id="focusAudio" src="Not You Too.mp3" preload="metadata"></audio>
                     </div>
                 </div>
 
@@ -121,60 +196,181 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-10 text-center text-gray-400">
-        <div class="max-w-6xl mx-auto px-4 space-y-2">
-            <p class="text-white font-semibold text-lg tracking-wide">Amal Abraham</p>
-            <p class="text-sm text-gray-400 font-medium">MCA - B</p>
-            <p class="text-sm text-gray-400 font-medium">Christ University</p>
-            <div class="border-t border-gray-800 my-4 max-w-xs mx-auto"></div>
-            <p class="text-xs text-gray-500">&copy; 2026 Placement Bud. All rights reserved.</p>
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
+            <!-- FOOTER IDENTITY -->
+            <div class="text-left">
+                <div class="font-bold text-slate-900 mb-1">Amal Abraham</div>
+                <div class="text-slate-500">ID: 2647207 | Full Stack Dev | 2026 MCA B</div>
+            </div>
+            
+            <div class="flex flex-col md:items-end gap-2">
+                <div class="font-semibold text-slate-700">
+                    <span class="text-indigo-600 font-bold">P</span>lacement<span class="text-emerald-500 font-bold">B</span>ud &copy; 2026
+                </div>
+                <a href="#" class="hover:text-slate-900 transition-colors">Privacy Policy</a>
+            </div>
         </div>
     </footer>
 
-    <!-- DEAD-SIMPLE JAVASCRIPT LOGIC FOR VIVA -->
+    <!-- INTERACTIVE SCRIPTS -->
     <script>
-        // 1. Local Storage API
-        function saveCompany() {
-            let value = document.getElementById('targetCompanyInput').value;
-            localStorage.setItem('savedCompany', value);
-            alert('Saved successfully!');
-        }
-        function loadCompany() {
-            let value = localStorage.getItem('savedCompany');
-            document.getElementById('targetCompanyInput').value = value || "No data saved";
-        }
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // 2. Geolocation API
-        function fetchCoordinates() {
-            document.getElementById('geoDisplay').innerText = "Locating...";
-            navigator.geolocation.getCurrentPosition((position) => {
-                let lat = position.coords.latitude.toFixed(4);
-                let lon = position.coords.longitude.toFixed(4);
-                document.getElementById('geoDisplay').innerText = `Lat: ${lat}° | Lon: ${lon}°`;
+            // ==========================================
+            // API 1: LOCAL STORAGE API 
+            // ==========================================
+            const deptSelect = document.getElementById('deptSelect');
+            const dynamicDept = document.getElementById('dynamicDept');
+
+            const updateDepartmentUI = (selectedDept) => {
+                if (selectedDept && selectedDept !== 'General') {
+                    dynamicDept.textContent = `${selectedDept} Department`;
+                } else {
+                    dynamicDept.textContent = 'Christ University Students';
+                }
+            };
+
+            const cachedDept = localStorage.getItem('placementBud_dept') || 'General';
+            deptSelect.value = cachedDept;
+            updateDepartmentUI(cachedDept);
+
+            deptSelect.addEventListener('change', (e) => {
+                const choice = e.target.value;
+                localStorage.setItem('placementBud_dept', choice);
+                updateDepartmentUI(choice);
             });
-        }
 
-        // 3. Audio API
-        let audio = new Audio('Not You Too (Drake).mp3');
-        function playPrompt() { audio.play(); }
-        function pausePrompt() { audio.pause(); }
+            // ==========================================
+            // API 2: WEB NOTIFICATIONS API 
+            // ==========================================
+            const notifyBtn = document.getElementById('notifyBtn');
 
-        // 4. File API
-        function processFile() {
-            let fileObj = document.getElementById('resumeSelector').files[0];
-            if (fileObj) {
-                let sizeKB = (fileObj.size / 1024).toFixed(1);
-                document.getElementById('fileDisplay').innerText = `${fileObj.name} (${sizeKB} KB)`;
+            notifyBtn.addEventListener('click', () => {
+                if (!('Notification' in window)) return alert('Notifications unsupported.');
+
+                if (Notification.permission === 'granted') {
+                    triggerNotification();
+                } else if (Notification.permission !== 'denied') {
+                    Notification.requestPermission().then(p => {
+                        if (p === 'granted') triggerNotification();
+                    });
+                }
+            });
+
+            function triggerNotification() {
+                new Notification('PlacementBud Active', { body: 'Live alerts enabled for Christ University campus drives.' });
+                notifyBtn.innerHTML = `Alert Subscription Active`;
+                notifyBtn.classList.replace('bg-slate-900', 'bg-slate-800');
+                notifyBtn.disabled = true;
             }
-        }
 
-        // 5. Clipboard API
-        function copyToken() {
-            let token = document.getElementById('tokenText').value;
-            navigator.clipboard.writeText(token);
-            alert('Copied token to clipboard!');
-        }
+            // ==========================================
+            // API 3: CLIPBOARD API 
+            // ==========================================
+            const copyBtn = document.getElementById('copyBtn');
+            const inviteCode = document.getElementById('inviteCode').textContent;
+
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(inviteCode);
+                    copyBtn.textContent = 'Copied!';
+                    copyBtn.classList.replace('bg-white/10', 'bg-emerald-600');
+                    setTimeout(() => {
+                        copyBtn.textContent = 'Copy Code';
+                        copyBtn.classList.replace('bg-emerald-600', 'bg-white/10');
+                    }, 2500);
+                } catch (err) {
+                    console.error('Copy failed: ', err);
+                }
+            });
+
+            // ==========================================
+            // API 4: GEOLOCATION API
+            // ==========================================
+            const geoBtn = document.getElementById('geoBtn');
+            const geoResult = document.getElementById('geoResult');
+
+            geoBtn.addEventListener('click', () => {
+                if (!navigator.geolocation) {
+                    geoResult.innerHTML = "Geolocation is not supported by your browser.";
+                    geoResult.classList.remove('hidden');
+                    return;
+                }
+
+                geoBtn.innerHTML = `<span class="animate-pulse">Scanning GPS Signals...</span>`;
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude.toFixed(4);
+                        const lon = position.coords.longitude.toFixed(4);
+                        
+                        geoResult.innerHTML = `
+                            <div class="mb-1"><strong>LAT:</strong> ${lat} &nbsp; | &nbsp; <strong>LON:</strong> ${lon}</div>
+                            <div class="text-emerald-400">Scanning 5km radius for active recruiters... Found 2 matches!</div>
+                        `;
+                        geoResult.classList.remove('hidden');
+                        geoBtn.innerHTML = `Radar Active`;
+                        geoBtn.disabled = true;
+                        geoBtn.classList.replace('bg-slate-800', 'bg-emerald-900/50');
+                        geoBtn.classList.replace('border-slate-700', 'border-emerald-500/30');
+                    },
+                    (error) => {
+                        geoResult.innerHTML = `Error: ${error.message}`;
+                        geoResult.classList.remove('hidden');
+                        geoBtn.innerHTML = `Scan Failed`;
+                    }
+                );
+            });
+
+            // ==========================================
+            // API 5: AUDIO API (HTMLMediaElement)
+            // ==========================================
+            const audio = document.getElementById('focusAudio');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const playIcon = document.getElementById('playIcon');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const progressBar = document.getElementById('audioProgress');
+            const timeDisplay = document.getElementById('timeDisplay');
+
+            // Toggle Play/Pause
+            playPauseBtn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                } else {
+                    audio.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                }
+            });
+
+            // Format time display (M:SS)
+            const formatTime = (seconds) => {
+                if (isNaN(seconds)) return "0:00";
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            };
+
+            // Update custom progress bar and time text
+            audio.addEventListener('timeupdate', () => {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${percent}%`;
+                timeDisplay.textContent = formatTime(audio.currentTime);
+            });
+
+            // Reset when audio finishes
+            audio.addEventListener('ended', () => {
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                progressBar.style.width = `0%`;
+                timeDisplay.textContent = "0:00";
+            });
+
+        });
     </script>
 </body>
 </html>
