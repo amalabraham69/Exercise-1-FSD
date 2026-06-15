@@ -9,21 +9,16 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased">
 
-    <!-- Navigation -->
+    <!-- Navigation Bar -->
     <nav class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-blue-600">
-                🎓 Placement Bud
-            </div>
-            <!-- Updated Navbar Links -->
+            <div class="text-2xl font-bold text-blue-600">🎓 Placement Bud</div>
             <div class="space-x-6 hidden md:flex font-medium">
                 <a href="#recruiters" class="hover:text-blue-600 transition">Recruiters</a>
                 <a href="#interviews" class="hover:text-blue-600 transition">Interviews</a>
                 <a href="#alumni" class="hover:text-blue-600 transition">Alumni</a>
             </div>
-            <a href="#signup" class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition">
-                Sign Up
-            </a>
+            <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition">Sign Up</button>
         </div>
     </nav>
 
@@ -36,16 +31,15 @@
             <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
                 Placement Bud helps you prepare for interviews, build a standout resume, and connect with top recruiters. Your dream job is just a click away.
             </p>
-            <!-- Reoriented Button Layout (Single Centered CTA) -->
             <div class="flex justify-center">
-                <a href="#start" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">
+                <a href="#features" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-700 transition">
                     Get Started Free
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content: Updated Features Section -->
+    <!-- Main Content Section -->
     <section id="features" class="py-20 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
@@ -54,26 +48,75 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-10">
-                <!-- Box 1: Recruiter Tracking -->
-                <div id="recruiters" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition duration-300 text-center">
-                    <div class="text-4xl mb-4">📊</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Recruiter Tracking</h3>
-                    <p class="text-gray-600">Keep tabs on your applications and get real-time updates on your hiring pipeline with top companies.</p>
+                
+                <!-- Box 1: Recruiter Tracking (Local Storage API + Geolocation API) -->
+                <div id="recruiters" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl mb-4 text-center">📊</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Recruiter Tracking</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">Keep tabs on your applications and get real-time updates on your hiring pipeline.</p>
+                    </div>
+                    <div class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                        <!-- 1. Local Storage -->
+                        <div>
+                            <label class="block text-left text-xs font-semibold text-gray-500 mb-1">Target Company:</label>
+                            <div class="flex gap-1">
+                                <input id="targetCompanyInput" type="text" class="w-full text-xs p-2 border rounded-md focus:outline-none" placeholder="e.g., Microsoft">
+                                <button onclick="saveCompany()" class="text-xs bg-gray-800 text-white px-2 rounded">Save</button>
+                                <button onclick="loadCompany()" class="text-xs bg-gray-200 text-gray-700 px-2 rounded">Load</button>
+                            </div>
+                        </div>
+                        <!-- 2. Geolocation -->
+                        <div class="pt-2 border-t border-gray-100 text-center">
+                            <button onclick="fetchCoordinates()" class="w-full text-xs bg-blue-600 hover:bg-blue-700 text-white font-medium py-1.5 px-3 rounded transition">
+                                Find Nearby Jobs
+                            </button>
+                            <p id="geoDisplay" class="text-[11px] text-blue-600 font-bold mt-1.5 h-4"></p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Box 2: Mock Interviews -->
-                <div id="interviews" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition duration-300 text-center">
-                    <div class="text-4xl mb-4">🎤</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Mock Interviews</h3>
-                    <p class="text-gray-600">Practice with AI-driven mock interviews and get instant feedback on your tone, body language, and answers.</p>
+                <!-- Box 2: Mock Interviews (Audio API + File API) -->
+                <div id="interviews" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl mb-4 text-center">🎤</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Mock Interviews</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">Practice with AI-driven mock interviews and get instant feedback on your answers.</p>
+                    </div>
+                    <div class="space-y-3 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                        <!-- 3. Audio API -->
+                        <div class="flex gap-2">
+                            <button onclick="playPrompt()" class="w-1/2 text-xs bg-emerald-600 text-white font-medium py-1.5 rounded">▶ Play</button>
+                            <button onclick="pausePrompt()" class="w-1/2 text-xs bg-amber-600 text-white font-medium py-1.5 rounded">⏸ Pause</button>
+                        </div>
+                        <!-- 4. File API -->
+                        <div class="pt-2 border-t border-gray-100 text-center">
+                            <input type="file" id="resumeSelector" onchange="processFile()" class="hidden">
+                            <label for="resumeSelector" class="block w-full text-center text-xs bg-gray-800 text-white font-medium py-1.5 rounded cursor-pointer">
+                                Upload Resume
+                            </label>
+                            <p id="fileDisplay" class="text-[10px] text-gray-600 mt-1.5 truncate font-medium"></p>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Box 3: Voice Of Alumni -->
-                <div id="alumni" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition duration-300 text-center">
-                    <div class="text-4xl mb-4">🗣️</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Voice Of Alumni</h3>
-                    <p class="text-gray-600">Learn directly from seniors and alumni who have successfully cracked interviews at your dream organizations.</p>
+                <!-- Box 3: Voice Of Alumni (Clipboard API) -->
+                <div id="alumni" class="p-8 bg-gray-50 rounded-2xl border border-gray-100 hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div class="text-4xl mb-4 text-center">🗣️</div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 text-center">Voice Of Alumni</h3>
+                        <p class="text-gray-600 text-sm mb-4 text-center">Learn directly from seniors who successfully cracked interviews at your dream organizations.</p>
+                    </div>
+                    <!-- 5. Clipboard API -->
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                        <label class="block text-left text-xs font-semibold text-gray-500 mb-1">Alumni Access Token:</label>
+                        <div class="flex gap-2">
+                            <input id="tokenText" type="text" value="CHRIST-MCA-2026" readonly class="w-full text-xs bg-gray-50 p-1.5 border rounded text-center font-bold text-gray-700">
+                            <button onclick="copyToken()" class="text-xs bg-blue-600 text-white font-medium py-1 px-3 rounded whitespace-nowrap">Copy</button>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -89,5 +132,49 @@
         </div>
     </footer>
 
+    <!-- DEAD-SIMPLE JAVASCRIPT LOGIC FOR VIVA -->
+    <script>
+        // 1. Local Storage API
+        function saveCompany() {
+            let value = document.getElementById('targetCompanyInput').value;
+            localStorage.setItem('savedCompany', value);
+            alert('Saved successfully!');
+        }
+        function loadCompany() {
+            let value = localStorage.getItem('savedCompany');
+            document.getElementById('targetCompanyInput').value = value || "No data saved";
+        }
+
+        // 2. Geolocation API
+        function fetchCoordinates() {
+            document.getElementById('geoDisplay').innerText = "Locating...";
+            navigator.geolocation.getCurrentPosition((position) => {
+                let lat = position.coords.latitude.toFixed(4);
+                let lon = position.coords.longitude.toFixed(4);
+                document.getElementById('geoDisplay').innerText = `Lat: ${lat}° | Lon: ${lon}°`;
+            });
+        }
+
+        // 3. Audio API
+        let audio = new Audio('Not You Too (Drake).mp3');
+        function playPrompt() { audio.play(); }
+        function pausePrompt() { audio.pause(); }
+
+        // 4. File API
+        function processFile() {
+            let fileObj = document.getElementById('resumeSelector').files[0];
+            if (fileObj) {
+                let sizeKB = (fileObj.size / 1024).toFixed(1);
+                document.getElementById('fileDisplay').innerText = `${fileObj.name} (${sizeKB} KB)`;
+            }
+        }
+
+        // 5. Clipboard API
+        function copyToken() {
+            let token = document.getElementById('tokenText').value;
+            navigator.clipboard.writeText(token);
+            alert('Copied token to clipboard!');
+        }
+    </script>
 </body>
 </html>
