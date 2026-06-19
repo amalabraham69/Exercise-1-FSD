@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PlacementBud — Christ University Placement Portal</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,33 +22,29 @@
 </head>
 <body class="bg-[#f8fafc] text-slate-900 antialiased font-sans selection:bg-indigo-100">
 
-    <!-- HEADER & NAVIGATION -->
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <!-- REVERTED TO ORIGINAL LOGO -->
             <div class="text-xl font-bold tracking-tight">
                 <span class="text-indigo-600 text-2xl font-extrabold">P</span>lacement<span class="text-emerald-500 text-2xl font-extrabold">B</span>ud
             </div>
 
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                <a href="#features" class="hover:text-indigo-600 transition-colors">Features</a>
-                <a href="#metrics" class="hover:text-indigo-600 transition-colors">Live Metrics</a>
-                <a href="#tools" class="hover:text-indigo-600 transition-colors">Prep Tools</a>
+                <a href="#features" class="hover:text-indigo-600 transition-colors">Recruiters</a>
+                <a href="#metrics" class="hover:text-indigo-600 transition-colors">Mock Interviews</a>
+                <a href="#tools" class="hover:text-indigo-600 transition-colors">Alumni</a>
             </nav>
 
-            <!-- API 1: Local Storage (Department Selector) -->
             <div class="flex items-center gap-3">
                 <label for="deptSelect" class="text-xs font-semibold text-slate-500 uppercase tracking-wider hidden sm:inline">Dept:</label>
                 <select id="deptSelect" class="bg-slate-50 border border-slate-200 rounded-lg text-sm px-3 py-1.5 focus:outline-none focus:border-indigo-500 text-slate-700 font-medium">
                     <option value="General">--Select Dept--</option>
-                    <option value="BTech">Computer Science</option>
-                    <option value="BCA">Management</option>
+                    <option value="CS">Computer Science</option>
+                    <option value="Management">Management</option>
                 </select>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="relative overflow-hidden py-20 lg:py-28 border-b border-slate-100 bg-white">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
             
@@ -63,10 +58,9 @@
                     Navigate your campus placement with total clarity.
                 </h1>
                 <p class="text-lg text-slate-600 leading-relaxed mb-8">
-                    Built specifically for Christites !<br> Career journey start with a lil boost from Christ.
+                    Built specifically for Christites! <br> Career journey start with a lil boost from Christ.
                 </p>
 
-                <!-- API 2: Web Notifications Button -->
                 <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                     <button id="notifyBtn" class="bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm px-6 py-3 rounded-xl transition-all shadow-sm flex items-center gap-2">
                         <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
@@ -76,15 +70,11 @@
                 </div>
             </div>
 
-            <!-- Hero Right Content: Only Rocket & Clipboard -->
             <div id="metrics" class="lg:col-span-5 bg-[#f8fafc] border border-slate-200/60 rounded-3xl p-8 shadow-xl shadow-slate-100 flex flex-col justify-center">
-
-                <!-- Rocket Image -->
                 <div class="bg-white border border-slate-100 rounded-2xl p-2 shadow-sm mb-6 flex justify-center items-center overflow-hidden">
                     <img src="Rocket.png" alt="Rocket" class="w-full h-auto max-h-[200px] object-cover rounded-xl transition-transform hover:scale-105 duration-500">
                 </div>
 
-                <!-- API 3: Clipboard Integration Element -->
                 <div class="bg-slate-900 text-slate-200 rounded-2xl p-4 flex items-center justify-between">
                     <div>
                         <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Exclusive Preparation Code</div>
@@ -95,11 +85,9 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- CORE FEATURES SECTION -->
     <section id="features" class="py-24 max-w-7xl mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <h2 class="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-3">End-to-End Tracking Architecture</h2>
@@ -122,9 +110,14 @@
                 <p class="text-slate-600 text-sm leading-relaxed">Practice stress handling with cross-department technical questions, dynamic casing templates, and instantaneous generative analytical scorecards.</p>
             </div>
         </div>
+
+        <div class="flex justify-center mt-12">
+            <button id="openModalBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg hover:scale-105">
+                Register Now
+            </button>
+        </div>
     </section>
 
-    <!-- NEW: DEEP WORK & DISCOVERY ZONE -->
     <section id="tools" class="py-20 bg-slate-950 text-white relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="max-w-2xl mb-12">
@@ -134,8 +127,6 @@
             </div>
 
             <div class="grid sm:grid-cols-2 gap-6 max-w-4xl">
-                
-                <!-- API 4: GEOLOCATION API WIDGET -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between transition-colors relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4 opacity-10 text-emerald-400">
                         <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
@@ -152,13 +143,10 @@
                             <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             Scan My Location
                         </button>
-                        <div id="geoResult" class="hidden mt-4 p-3 bg-emerald-900/20 border border-emerald-500/20 rounded-lg text-xs text-emerald-200 font-mono">
-                            <!-- Coordinates will appear here -->
-                        </div>
+                        <div id="geoResult" class="hidden mt-4 p-3 bg-emerald-900/20 border border-emerald-500/20 rounded-lg text-xs text-emerald-200 font-mono"></div>
                     </div>
                 </div>
 
-                <!-- API 5: AUDIO API WIDGET -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between transition-colors">
                     <div>
                         <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
@@ -167,12 +155,9 @@
                         <p class="text-sm text-slate-300 font-medium mb-6">Alumni stories? Get in the zone.</p>
                     </div>
                     
-                    <!-- Sleek Custom Audio Player -->
                     <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex items-center gap-4">
                         <button id="playPauseBtn" class="w-12 h-12 flex-shrink-0 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full flex items-center justify-center transition-all shadow-lg shadow-indigo-900/20">
-                            <!-- Play Icon -->
                             <svg id="playIcon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                            <!-- Pause Icon (Hidden initially) -->
                             <svg id="pauseIcon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                         </button>
                         
@@ -181,30 +166,23 @@
                                 <span class="text-sm font-bold text-slate-100">Batch 2026</span>
                                 <span id="timeDisplay" class="text-[10px] text-slate-500 font-mono">0:00</span>
                             </div>
-                            <!-- Custom Progress Bar -->
                             <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
                                 <div id="audioProgress" class="h-full bg-indigo-500 w-0 transition-all duration-100 ease-linear"></div>
                             </div>
                         </div>
-
-                        <!-- Hidden Audio Element -->
                         <audio id="focusAudio" src="Not You Too.mp3" preload="metadata"></audio>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-12 text-center text-xs text-slate-500">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-6">
-            <!-- FOOTER IDENTITY -->
             <div class="text-left">
                 <div class="font-bold text-slate-900 mb-1">Amal Abraham</div>
                 <div class="text-slate-500">ID: 2647207 | Full Stack Dev | 2026 MCA B</div>
             </div>
-            
             <div class="flex flex-col md:items-end gap-2">
                 <div class="font-semibold text-slate-700">
                     <span class="text-indigo-600 font-bold">P</span>lacement<span class="text-emerald-500 font-bold">B</span>ud &copy; 2026
@@ -214,162 +192,97 @@
         </div>
     </footer>
 
-    <!-- INTERACTIVE SCRIPTS -->
+    <div id="registrationModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm p-6">
+        <div class="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl relative">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
+            <h2 class="text-xl font-bold mb-6">Mock Interview Registration</h2>
+            <form id="regForm" class="space-y-4">
+                <input type="text" placeholder="Full Name" class="w-full border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500" required>
+                <input type="number" placeholder="Register Number" class="w-full border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500" required>
+                <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700">Submit Details</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. Modal Logic (Click Events)
+            const modal = document.getElementById('registrationModal');
+            const openModalBtn = document.getElementById('openModalBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            openModalBtn.addEventListener('click', () => modal.classList.replace('hidden', 'flex'));
+            closeModalBtn.addEventListener('click', () => modal.classList.replace('flex', 'hidden'));
+            window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.replace('flex', 'hidden'); });
 
-            // ==========================================
-            // API 1: LOCAL STORAGE API 
-            // ==========================================
-            const deptSelect = document.getElementById('deptSelect');
-            const dynamicDept = document.getElementById('dynamicDept');
-
-            const updateDepartmentUI = (selectedDept) => {
-                if (selectedDept && selectedDept !== 'General') {
-                    dynamicDept.textContent = `${selectedDept} Department`;
-                } else {
-                    dynamicDept.textContent = 'Christ University Students';
+            // 2. Form Logic (Submit Event & Validation)
+            const regForm = document.getElementById('regForm');
+            regForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevents page refresh
+                const name = regForm.querySelector('input[type="text"]').value;
+                const regNo = regForm.querySelector('input[type="number"]').value;
+                if (name.trim() === "" || regNo.trim() === "") {
+                    alert("Please fill in all fields.");
+                    return;
                 }
-            };
-
-            const cachedDept = localStorage.getItem('placementBud_dept') || 'General';
-            deptSelect.value = cachedDept;
-            updateDepartmentUI(cachedDept);
-
-            deptSelect.addEventListener('change', (e) => {
-                const choice = e.target.value;
-                localStorage.setItem('placementBud_dept', choice);
-                updateDepartmentUI(choice);
+                alert(`Success! ${name}, your registration is confirmed.`);
+                modal.classList.replace('flex', 'hidden');
+                regForm.reset();
             });
 
-            // ==========================================
-            // API 2: WEB NOTIFICATIONS API 
-            // ==========================================
+            // 3. Department Storage (Change Event)
+            const deptSelect = document.getElementById('deptSelect');
+            const dynamicDept = document.getElementById('dynamicDept');
+            const updateDept = (d) => dynamicDept.textContent = (d && d !== 'General') ? `${d} Department` : 'Christites';
+            const cached = localStorage.getItem('placementBud_dept') || 'General';
+            deptSelect.value = cached; updateDept(cached);
+            deptSelect.addEventListener('change', (e) => {
+                localStorage.setItem('placementBud_dept', e.target.value);
+                updateDept(e.target.value);
+            });
+
+            // 4. Notifications (Click Event)
             const notifyBtn = document.getElementById('notifyBtn');
-
             notifyBtn.addEventListener('click', () => {
-                if (!('Notification' in window)) return alert('Notifications unsupported.');
-
-                if (Notification.permission === 'granted') {
-                    triggerNotification();
-                } else if (Notification.permission !== 'denied') {
+                if ('Notification' in window && Notification.permission !== 'denied') {
                     Notification.requestPermission().then(p => {
-                        if (p === 'granted') triggerNotification();
+                        if (p === 'granted') {
+                            new Notification('PlacementBud Active', { body: 'Live alerts enabled.' });
+                            notifyBtn.textContent = 'Alert Subscription Active';
+                        }
                     });
                 }
             });
 
-            function triggerNotification() {
-                new Notification('PlacementBud Active', { body: 'Live alerts enabled for Christ University campus drives.' });
-                notifyBtn.innerHTML = `Alert Subscription Active`;
-                notifyBtn.classList.replace('bg-slate-900', 'bg-slate-800');
-                notifyBtn.disabled = true;
-            }
-
-            // ==========================================
-            // API 3: CLIPBOARD API 
-            // ==========================================
+            // 5. Clipboard (Click Event)
             const copyBtn = document.getElementById('copyBtn');
-            const inviteCode = document.getElementById('inviteCode').textContent;
-
-            copyBtn.addEventListener('click', async () => {
-                try {
-                    await navigator.clipboard.writeText(inviteCode);
-                    copyBtn.textContent = 'Copied!';
-                    copyBtn.classList.replace('bg-white/10', 'bg-emerald-600');
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Copy Code';
-                        copyBtn.classList.replace('bg-emerald-600', 'bg-white/10');
-                    }, 2500);
-                } catch (err) {
-                    console.error('Copy failed: ', err);
-                }
+            copyBtn.addEventListener('click', () => {
+                navigator.clipboard.writeText(document.getElementById('inviteCode').textContent);
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => copyBtn.textContent = 'Copy Code', 2000);
             });
 
-            // ==========================================
-            // API 4: GEOLOCATION API
-            // ==========================================
+            // 6. Geolocation (Click Event)
             const geoBtn = document.getElementById('geoBtn');
-            const geoResult = document.getElementById('geoResult');
-
             geoBtn.addEventListener('click', () => {
-                if (!navigator.geolocation) {
-                    geoResult.innerHTML = "Geolocation is not supported by your browser.";
-                    geoResult.classList.remove('hidden');
-                    return;
-                }
-
-                geoBtn.innerHTML = `<span class="animate-pulse">Scanning GPS Signals...</span>`;
-
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const lat = position.coords.latitude.toFixed(4);
-                        const lon = position.coords.longitude.toFixed(4);
-                        
-                        geoResult.innerHTML = `
-                            <div class="mb-1"><strong>LAT:</strong> ${lat} &nbsp; | &nbsp; <strong>LON:</strong> ${lon}</div>
-                            <div class="text-emerald-400">Scanning 5km radius for active recruiters... Found 2 matches!</div>
-                        `;
-                        geoResult.classList.remove('hidden');
-                        geoBtn.innerHTML = `Radar Active`;
-                        geoBtn.disabled = true;
-                        geoBtn.classList.replace('bg-slate-800', 'bg-emerald-900/50');
-                        geoBtn.classList.replace('border-slate-700', 'border-emerald-500/30');
-                    },
-                    (error) => {
-                        geoResult.innerHTML = `Error: ${error.message}`;
-                        geoResult.classList.remove('hidden');
-                        geoBtn.innerHTML = `Scan Failed`;
-                    }
-                );
+                navigator.geolocation.getCurrentPosition(pos => {
+                    document.getElementById('geoResult').classList.remove('hidden');
+                    document.getElementById('geoResult').textContent = `Loc: ${pos.coords.latitude.toFixed(2)}, ${pos.coords.longitude.toFixed(2)}`;
+                    geoBtn.textContent = 'Radar Active';
+                });
             });
 
-            // ==========================================
-            // API 5: AUDIO API (HTMLMediaElement)
-            // ==========================================
+            // 7. Audio Player (Timeupdate Event)
             const audio = document.getElementById('focusAudio');
             const playPauseBtn = document.getElementById('playPauseBtn');
-            const playIcon = document.getElementById('playIcon');
-            const pauseIcon = document.getElementById('pauseIcon');
-            const progressBar = document.getElementById('audioProgress');
-            const timeDisplay = document.getElementById('timeDisplay');
-
-            // Toggle Play/Pause
             playPauseBtn.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play();
-                    playIcon.classList.add('hidden');
-                    pauseIcon.classList.remove('hidden');
-                } else {
-                    audio.pause();
-                    playIcon.classList.remove('hidden');
-                    pauseIcon.classList.add('hidden');
-                }
+                audio.paused ? audio.play() : audio.pause();
+                document.getElementById('playIcon').classList.toggle('hidden');
+                document.getElementById('pauseIcon').classList.toggle('hidden');
             });
-
-            // Format time display (M:SS)
-            const formatTime = (seconds) => {
-                if (isNaN(seconds)) return "0:00";
-                const mins = Math.floor(seconds / 60);
-                const secs = Math.floor(seconds % 60);
-                return `${mins}:${secs.toString().padStart(2, '0')}`;
-            };
-
-            // Update custom progress bar and time text
             audio.addEventListener('timeupdate', () => {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progressBar.style.width = `${percent}%`;
-                timeDisplay.textContent = formatTime(audio.currentTime);
+                document.getElementById('audioProgress').style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+                document.getElementById('timeDisplay').textContent = Math.floor(audio.currentTime/60) + ":" + Math.floor(audio.currentTime%60).toString().padStart(2, '0');
             });
-
-            // Reset when audio finishes
-            audio.addEventListener('ended', () => {
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-                progressBar.style.width = `0%`;
-                timeDisplay.textContent = "0:00";
-            });
-
         });
     </script>
 </body>
