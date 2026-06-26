@@ -12,26 +12,99 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                     },
+                    animation: {
+                        blob: "blob 7s infinite",
+                    },
+                    keyframes: {
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" },
+                        }
+                    }
                 },
             },
         }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Hero wraps both header and section so image spans both */
+        .hero-wrapper {
+            position: relative;
+            isolation: isolate;
+        }
+        .hero-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('Positive-Workplace.jpg');
+            background-size: cover;
+            background-position: center center;
+            z-index: -2;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            /* Neutral charcoal — not warm, not blue. Lets image warmth show naturally underneath */
+            background: linear-gradient(to right, rgba(18,18,20,0.78) 0%, rgba(18,18,20,0.52) 55%, rgba(18,18,20,0.20) 100%);
+            z-index: -1;
+        }
+        #siteHeader {
+            transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+        #siteHeader.is-transparent {
+            background: transparent !important;
+            border-bottom-color: transparent !important;
+            backdrop-filter: none !important;
+            box-shadow: none !important;
+        }
+        #siteHeader.is-transparent .nav-link { color: rgba(255,255,255,0.85); }
+        #siteHeader.is-transparent .nav-link:hover { color: #fff; }
+        #siteHeader.is-transparent .logo-text { color: #fff; }
+        #siteHeader.is-transparent #deptSelect {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.25);
+            color: #fff;
+        }
+        #siteHeader.is-transparent #deptSelect option {
+            background: #1c1c1e;
+            color: #fff;
+        }
+        #siteHeader.is-transparent label[for="deptSelect"] { color: rgba(255,255,255,0.65); }
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .rocket-img {
+            opacity: 0.55;
+            filter: blur(1px);
+            transition: opacity 0.3s, filter 0.3s;
+        }
+        .rocket-img:hover {
+            opacity: 0.75;
+            filter: blur(0px);
+        }
+    </style>
 </head>
-<body class="bg-[#f8fafc] text-slate-900 antialiased font-sans selection:bg-indigo-100">
+<body class="bg-[#f8fafc] text-slate-900 antialiased font-sans selection:bg-indigo-100" style="padding-top: 0;">
 
-    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
+    <!-- LOAD EVENT: Toast notification shown on page load -->
+    <div id="welcomeToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] bg-slate-900 text-white text-sm font-medium px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 opacity-0 transition-all duration-500 pointer-events-none">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span id="welcomeToastMsg">Welcome back, Christite! 👋</span>
+    </div>
+
+    <!-- Header is FIXED so it always follows on scroll, sits above the hero image -->
+    <header id="siteHeader" class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="text-xl font-bold tracking-tight">
-                <span class="text-indigo-600 text-2xl font-extrabold">P</span>lacement<span class="text-emerald-500 text-2xl font-extrabold">B</span>ud
+            <div class="text-xl font-bold tracking-tight logo-text transition-colors">
+                <span class="text-indigo-400 text-2xl font-extrabold">P</span>lacement<span class="text-emerald-400 text-2xl font-extrabold">B</span>ud
             </div>
 
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-                <a href="#features" class="hover:text-indigo-600 transition-colors">Recruiters</a>
-                <a href="#metrics" class="hover:text-indigo-600 transition-colors">Mock Interviews</a>
-                <a href="#tools" class="hover:text-indigo-600 transition-colors">Alumni</a>
+                <a href="#features" class="nav-link hover:text-indigo-600 transition-colors">Recruiters</a>
+                <a href="#metrics" class="nav-link hover:text-indigo-600 transition-colors">Mock Interviews</a>
+                <a href="#tools" class="nav-link hover:text-indigo-600 transition-colors">Alumni</a>
             </nav>
 
             <div class="flex items-center gap-3">
@@ -45,37 +118,41 @@
         </div>
     </header>
 
-    <section class="relative overflow-hidden py-20 lg:py-28 border-b border-slate-100 bg-white">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+    <!-- hero-wrapper starts from very top, image fills behind fixed header naturally -->
+    <div class="hero-wrapper" style="margin-top: 0;">
+    <div class="hero-overlay"></div>
+
+    <section class="relative pt-40 pb-28 lg:pt-48 lg:pb-36 border-b border-white/10" style="z-index:2;">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center relative z-10">
             
             <div class="lg:col-span-7 max-w-2xl">
-                <div class="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 text-indigo-700 rounded-full px-3 py-1 text-xs font-medium mb-6">
-                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></span>
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full px-3 py-1 text-xs font-medium mb-6">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                     Tailored Workspace for <span id="dynamicDept" class="font-bold">Christites</span>
                 </div>
                 
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-[1.1] mb-6">
+                <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1] mb-6">
                     Navigate your campus placement with total clarity.
                 </h1>
-                <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                <p class="text-lg text-white/75 leading-relaxed mb-8">
                     Built specifically for Christites! <br> Career journey start with a lil boost from Christ.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                    <button id="notifyBtn" class="bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm px-6 py-3 rounded-xl transition-all shadow-sm flex items-center gap-2">
-                        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    <button id="notifyBtn" class="bg-white hover:bg-slate-100 text-slate-900 font-medium text-sm px-6 py-3 rounded-xl transition-all shadow-sm flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                         Enable Placement Drive Alerts
                     </button>
-                    <span class="text-xs text-slate-500 max-w-xs">Stay informed the instant marquee recruiters open applications on campus.</span>
+                    <span class="text-xs text-white/60 max-w-xs">Stay informed the instant marquee recruiters open applications on campus.</span>
                 </div>
             </div>
 
-            <div id="metrics" class="lg:col-span-5 bg-[#f8fafc] border border-slate-200/60 rounded-3xl p-8 shadow-xl shadow-slate-100 flex flex-col justify-center">
-                <div class="bg-white border border-slate-100 rounded-2xl p-2 shadow-sm mb-6 flex justify-center items-center overflow-hidden">
-                    <img src="Rocket.png" alt="Rocket" class="w-full h-auto max-h-[200px] object-cover rounded-xl transition-transform hover:scale-105 duration-500">
+            <div id="metrics" class="lg:col-span-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 shadow-xl flex flex-col justify-center">
+                <div class="bg-white/10 border border-white/20 rounded-2xl p-2 shadow-sm mb-6 flex justify-center items-center overflow-hidden">
+                    <img src="Rocket.png" alt="Rocket" class="rocket-img w-full h-auto max-h-[200px] object-cover rounded-xl">
                 </div>
 
-                <div class="bg-slate-900 text-slate-200 rounded-2xl p-4 flex items-center justify-between">
+                <div class="bg-slate-900/70 backdrop-blur-sm border border-white/10 text-slate-200 rounded-2xl p-4 flex items-center justify-between">
                     <div>
                         <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Exclusive Preparation Code</div>
                         <div id="inviteCode" class="text-sm font-mono font-semibold text-white tracking-wider">CHRIST-READY-2026</div>
@@ -87,6 +164,7 @@
             </div>
         </div>
     </section>
+    </div><!-- end hero-wrapper -->
 
     <section id="features" class="py-24 max-w-7xl mx-auto px-6">
         <div class="text-center max-w-3xl mx-auto mb-16">
@@ -94,15 +172,16 @@
             <p class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Everything required to successfully convert your day-one slots.</p>
         </div>
 
+        <!-- MOUSEOVER / MOUSEOUT EVENT: Applied to these two feature cards -->
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white border border-slate-200/70 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all">
+            <div id="card1" class="bg-white border border-slate-200/70 p-8 rounded-2xl shadow-sm transition-all duration-300">
                 <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 mb-6">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                 </div>
                 <h3 class="text-lg font-bold text-slate-900 mb-2">Automated Recruiter Pipelines</h3>
                 <p class="text-slate-600 text-sm leading-relaxed">Instantly view critical benchmarks, upcoming test patterns, eligibility criteria cut-offs, and custom application pipelines configured for Christ University.</p>
             </div>
-            <div class="bg-white border border-slate-200/70 p-8 rounded-2xl shadow-sm hover:shadow-md transition-all">
+            <div id="card2" class="bg-white border border-slate-200/70 p-8 rounded-2xl shadow-sm transition-all duration-300">
                 <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 mb-6">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                 </div>
@@ -163,7 +242,7 @@
                         
                         <div class="flex-grow">
                             <div class="flex justify-between items-end mb-1.5">
-                                <span class="text-sm font-bold text-slate-100">Batch 2026</span>
+                                <span class="text-sm font-bold text-slate-100">Not You Too- Drake</span>
                                 <span id="timeDisplay" class="text-[10px] text-slate-500 font-mono">0:00</span>
                             </div>
                             <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
@@ -196,6 +275,7 @@
         <div class="bg-white rounded-3xl p-8 w-full max-w-sm shadow-2xl relative">
             <button id="closeModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">✕</button>
             <h2 class="text-xl font-bold mb-6">Mock Interview Registration</h2>
+
             <form id="regForm" class="space-y-4">
                 <input type="text" placeholder="Full Name" class="w-full border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500" required>
                 <input type="number" placeholder="Register Number" class="w-full border border-slate-200 rounded-xl p-3 text-sm focus:outline-none focus:border-indigo-500" required>
@@ -206,7 +286,53 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Modal Logic (Click Events)
+
+            // ── 0. SCROLL: Transparent header over hero, solid after ──────────
+            const siteHeader = document.getElementById('siteHeader');
+            const applyHeaderState = () => {
+                if (window.scrollY < 60) {
+                    siteHeader.classList.add('is-transparent');
+                } else {
+                    siteHeader.classList.remove('is-transparent');
+                }
+            };
+            window.addEventListener('scroll', applyHeaderState);
+            applyHeaderState(); // run on load too
+
+            // ── 1. LOAD EVENT ────────────────────────────────────────────────
+            // Shows a welcome toast when the page finishes loading.
+            // Reads saved dept from localStorage to personalise the message.
+            window.addEventListener('load', () => {
+                const savedDept = localStorage.getItem('placementBud_dept');
+                const deptLabel = (savedDept && savedDept !== 'General') ? `${savedDept} student` : 'Christite';
+                document.getElementById('welcomeToastMsg').textContent = `Welcome back, ${deptLabel}! 👋`;
+                const toast = document.getElementById('welcomeToast');
+                // Fade in
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+                // Fade out after 3 seconds
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                }, 3000);
+            });
+
+            // ── 2. MOUSEOVER / MOUSEOUT EVENTS ───────────────────────────────
+            // Highlights feature cards on hover and restores them on mouse leave.
+            const featureCards = [document.getElementById('card1'), document.getElementById('card2')];
+            featureCards.forEach(card => {
+                card.addEventListener('mouseover', () => {
+                    card.style.boxShadow = '0 8px 30px rgba(99, 102, 241, 0.15)';
+                    card.style.borderColor = '#a5b4fc';
+                    card.style.transform = 'translateY(-4px)';
+                });
+                card.addEventListener('mouseout', () => {
+                    card.style.boxShadow = '';
+                    card.style.borderColor = '';
+                    card.style.transform = '';
+                });
+            });
+
+            // ── 4. Modal Logic (Click Events) ────────────────────────────────
             const modal = document.getElementById('registrationModal');
             const openModalBtn = document.getElementById('openModalBtn');
             const closeModalBtn = document.getElementById('closeModalBtn');
@@ -214,10 +340,10 @@
             closeModalBtn.addEventListener('click', () => modal.classList.replace('flex', 'hidden'));
             window.addEventListener('click', (e) => { if (e.target === modal) modal.classList.replace('flex', 'hidden'); });
 
-            // 2. Form Logic (Submit Event & Validation)
+            // ── 5. Form Logic (Submit Event & Validation) ────────────────────
             const regForm = document.getElementById('regForm');
             regForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // Prevents page refresh
+                e.preventDefault();
                 const name = regForm.querySelector('input[type="text"]').value;
                 const regNo = regForm.querySelector('input[type="number"]').value;
                 if (name.trim() === "" || regNo.trim() === "") {
@@ -229,7 +355,7 @@
                 regForm.reset();
             });
 
-            // 3. Department Storage (Change Event)
+            // ── 6. Department Storage (Change Event) ─────────────────────────
             const deptSelect = document.getElementById('deptSelect');
             const dynamicDept = document.getElementById('dynamicDept');
             const updateDept = (d) => dynamicDept.textContent = (d && d !== 'General') ? `${d} Department` : 'Christites';
@@ -240,7 +366,7 @@
                 updateDept(e.target.value);
             });
 
-            // 4. Notifications (Click Event)
+            // ── 7. Notifications (Click Event) ───────────────────────────────
             const notifyBtn = document.getElementById('notifyBtn');
             notifyBtn.addEventListener('click', () => {
                 if ('Notification' in window && Notification.permission !== 'denied') {
@@ -253,7 +379,7 @@
                 }
             });
 
-            // 5. Clipboard (Click Event)
+            // ── 8. Clipboard (Click Event) ───────────────────────────────────
             const copyBtn = document.getElementById('copyBtn');
             copyBtn.addEventListener('click', () => {
                 navigator.clipboard.writeText(document.getElementById('inviteCode').textContent);
@@ -261,7 +387,7 @@
                 setTimeout(() => copyBtn.textContent = 'Copy Code', 2000);
             });
 
-            // 6. Geolocation (Click Event)
+            // ── 9. Geolocation (Click Event) ─────────────────────────────────
             const geoBtn = document.getElementById('geoBtn');
             geoBtn.addEventListener('click', () => {
                 navigator.geolocation.getCurrentPosition(pos => {
@@ -271,7 +397,7 @@
                 });
             });
 
-            // 7. Audio Player (Timeupdate Event)
+            // ── 10. Audio Player (Timeupdate Event) ──────────────────────────
             const audio = document.getElementById('focusAudio');
             const playPauseBtn = document.getElementById('playPauseBtn');
             playPauseBtn.addEventListener('click', () => {
